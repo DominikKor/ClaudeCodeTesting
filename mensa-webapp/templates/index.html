@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ canteen_name }} – Speiseplan</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="page-header">
+    <h1>🍽️ {{ canteen_name }}</h1>
+    <p class="subtitle">Speiseplan für die nächsten Tage</p>
+  </header>
+
+  <main>
+    {% if error %}
+      <p class="error">{{ error }}</p>
+    {% elif not days %}
+      <p class="empty">Aktuell sind keine Gerichte verfügbar (z.&nbsp;B. am Wochenende).</p>
+    {% else %}
+      <nav class="day-tabs" role="tablist">
+        {% for day in days %}
+          <button
+            class="day-tab {% if loop.first %}active{% endif %}"
+            type="button"
+            data-target="day-{{ loop.index0 }}"
+          >
+            <span class="tab-weekday">{{ day.weekday }}</span>
+            <span class="tab-date">{{ day.date_display }}</span>
+            {% if day.is_today %}<span class="tab-today">Heute</span>{% endif %}
+          </button>
+        {% endfor %}
+      </nav>
+
+      <div class="days">
+        {% for day in days %}
+          <section
+            id="day-{{ loop.index0 }}"
+            class="day-panel {% if loop.first %}active{% endif %}"
+          >
+            <h2>{{ day.weekday }}, {{ day.date_display }}{% if day.is_today %} <span class="badge">Heute</span>{% endif %}</h2>
+
+            {% for lane in day.lanes %}
+              <div class="lane">
+                <h3>{{ lane.name }}</h3>
+                <ul class="meal-list">
+                  {% for meal in lane.meals %}
+                    <li class="meal">
+                      <div class="meal-main">
+                        <span class="meal-name">
+                          {{ meal.name }}
+                          {% for icon in meal.icons %}<span class="icon" title="{{ meal.categories | join(', ') }}">{{ icon }}</span>{% endfor %}
+                        </span>
+                        <span class="meal-price">{{ meal.price_student }} €</span>
+                      </div>
+                      {% if meal.allergens %}
+                        <details class="allergens">
+                          <summary>Allergene &amp; Zusatzstoffe</summary>
+                          <p>{{ meal.allergens | join(', ') }}</p>
+                        </details>
+                      {% endif %}
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endfor %}
+          </section>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </main>
+
+  <footer class="page-footer">
+    <p>Daten: Studierendenwerk OstNiedersachsen · Preise für Studierende</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
