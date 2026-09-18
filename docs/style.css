@@ -1,0 +1,209 @@
+:root {
+  --color-bg: #f6f7fb;
+  --color-surface: #ffffff;
+  --color-text: #1f2430;
+  --color-muted: #6b7280;
+  --color-primary: #d1495b;
+  --color-primary-light: #fbe9eb;
+  --color-border: #e5e7eb;
+  --radius: 14px;
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+.page-header {
+  padding: 2.5rem 1.5rem 1.5rem;
+  text-align: center;
+}
+
+.page-header h1 {
+  margin: 0 0 0.25rem;
+  font-size: 1.9rem;
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 1rem 3rem;
+}
+
+.error,
+.empty {
+  text-align: center;
+  color: var(--color-muted);
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  padding: 2rem;
+}
+
+.day-tabs {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+  scrollbar-width: thin;
+}
+
+.day-tab {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  border-radius: 999px;
+  cursor: pointer;
+  font: inherit;
+  color: var(--color-text);
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.day-tab:hover {
+  border-color: var(--color-primary);
+}
+
+.day-tab.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+
+.tab-weekday {
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.tab-date {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+.tab-today {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.day-panel {
+  display: none;
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.day-panel.active {
+  display: block;
+}
+
+.day-panel h2 {
+  margin-top: 0;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.badge {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+}
+
+.lane {
+  margin-top: 1.25rem;
+}
+
+.lane h3 {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-muted);
+}
+
+.meal-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.meal {
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.meal:last-child {
+  border-bottom: none;
+}
+
+.meal-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.meal-name {
+  font-weight: 500;
+}
+
+.icon {
+  margin-left: 0.2rem;
+  cursor: help;
+}
+
+.meal-price {
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-muted);
+}
+
+.allergens {
+  margin-top: 0.3rem;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+
+.allergens summary {
+  cursor: pointer;
+}
+
+.page-footer {
+  text-align: center;
+  color: var(--color-muted);
+  font-size: 0.8rem;
+  padding-bottom: 2rem;
+}
+
+@media (max-width: 480px) {
+  .page-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .day-panel {
+    padding: 1rem;
+  }
+}
